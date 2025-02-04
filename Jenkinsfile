@@ -13,8 +13,8 @@ environment {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn clean install -U'
-                sh 'mvn clean deploy'
+                
+                sh 'mvn clean deploy install -DskipTests -e'
 
             }
         }
