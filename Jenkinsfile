@@ -14,7 +14,7 @@ environment {
         stage('Build') {
             steps {
                 
-                sh 'mvn clean deploy install -DskipTests -e'
+                sh 'mvn clean deploy'
 
             }
         }
