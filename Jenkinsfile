@@ -11,13 +11,22 @@ environment {
 }
 
     stages {
-        stage('Build') {
+        
+         stage("build")
+            {
             steps {
-                
-                sh 'mvn clean install -U'
-                sh 'mvn deploy'
-
+                 echo "----------- build started ----------"
+                 sh 'mvn clean deploy -Dmaven.test.skip=true'
+                 echo "----------- build complted ----------"
+                 }
             }
+        stage("test")
+            {
+            steps{
+                echo "----------- unit test started ----------"
+                sh 'mvn surefire-report:report'
+                 echo "----------- unit test Complted ----------"
+                }
         }
     }
 }
