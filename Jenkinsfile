@@ -36,6 +36,7 @@ environment {
             steps{
                   withSonarQubeEnv('sonarqube-server') {
                     sh "${scannerHome}/bin/sonar-scanner"
+                    sh 'export NODE_OPTIONS="--max-old-space-size=4096"'
                   }
                 }
 
