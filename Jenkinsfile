@@ -28,14 +28,14 @@ environment {
                  echo "----------- unit test Complted ----------"
                 }
         }
-        stage('Sonarqube Analysis')
-             {
-              environment {
-                    scannerHome = tool 'sonar-scanner'
-                }
+        stage("Sonarqube Analysis")
+                {
+                    environment {
+                        scannerHome = tool 'sonar-scanner'
+                    }
             steps{
                   withSonarQubeEnv('sonarqube-server') 
-                  sh "${scannerHome}/bin/sonar-scanner"
+                  sh '${scannerHome}/bin/sonar-scanner'
                 }
 
              }
