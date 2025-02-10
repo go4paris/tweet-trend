@@ -16,7 +16,7 @@ environment {
             {
             steps {
                  echo "----------- build started ----------"
-                 sh 'mvn clean deploy -Dmaven.test.skip=true'
+                 sh 'mvn clean deploy package -Dmaven.test.skip=true'
                  echo "----------- build complted ----------"
                  }
             }
@@ -28,5 +28,17 @@ environment {
                  echo "----------- unit test Complted ----------"
                 }
         }
+        stage('Sonarqube Analysis')
+             {
+              environment {
+                    scannerHome = tool 'sonar-scanner'
+                }
+            steps{
+                  withSonarQubeEnv('sonarqube-server') 
+                  sh "${scannerHome}/bin/sonar-scanner"
+                }
+
+             }
+           
     }
 }
