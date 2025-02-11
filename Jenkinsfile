@@ -32,6 +32,7 @@ environment {
                 {
                     environment {
                         scannerHome = tool 'sonar-scanner'
+                        PATH ="/usr/bin:$PATH"
                     }
             steps{
                   withSonarQubeEnv('sonarqube-server') {
