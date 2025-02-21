@@ -1,6 +1,6 @@
 def registry = 'https://money.jfrog.io/'
-def version  = '2.1.4'
-def imageName = 'money.jfrog.io/money-docker-local/ttrend'
+def version  = '2.1.5'
+def imageName = 'money.jfrog.io/valaxy-docker-local/ttrend'
 
 pipeline {
     agent {
@@ -88,6 +88,34 @@ environment {
             
                     }
                 }   
+            }
+
+
+        stage(" Docker Build ") 
+            {
+            steps {
+                    script {
+                        echo '<--------------- Docker Build Started --------------->'
+                        echo '<-----Docker build is used to convert jar into docker images inorder to use them as micro services --->'
+                        app = docker.build(imageName+":"+version)
+                        echo '<--------------- Docker Build Ends --------------->'
+                   }
+               }
+           }
+
+
+        stage (" Docker Publish ")
+            {
+            steps {
+                    script {
+                            echo '<--------------- Docker Publish Started --------------->'  
+                            docker.withRegistry(registry, 'artifact-cred')
+                            {
+                            app.push()
+                            }    
+                            echo '<--------------- Docker Publish Ended --------------->'  
+                        }
+                }
             }
     }
 }
