@@ -1,3 +1,3 @@
 FROM openjdk:21
-ADD target/demo-workshop-2.1.4.jar ttrend.jar 
+COPY target/demo-workshop-2.1.4.jar ttrend.jar 
 ENTRYPOINT [ "java", "-jar", "ttrend.jar" ]
